@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Login Spring</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link th:href="@{/images/assets/logo1.jpg}" rel="icon">
+  <link th:href="@{/images/assets/logo1.jpg}" rel="apple-touch-icon">
+  
+  <!-- Bootstrap CSS -->
+  <link th:href="@{/css2/bootstrap.min.css}" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link th:href="@{/css2/bootstrap-theme.css}" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link th:href="@{/css2/elegant-icons-style.css}" rel="stylesheet" />
+  <link th:href="@{/css2/font-awesome.css}" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link th:href="@{/css2/style.css}" rel="stylesheet">
+  <link th:href="@{/css2/style-responsive.css}" rel="stylesheet" />
+  
+</head>
+<body class="login-img3-body">
+
+  
+  <div class="container">
+
+    <form class="login-form" th:action="@{'/login'}" method="post">
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <input type="text" class="form-control" name="username" id="username" placeholder="Correo" autofocus>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña">
+        </div>
+
+        <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Recordar
+                <span class="pull-right"> <a href="#"> Olvidaste tu contraseña?</a></span>
+        </label>
+        <input class="btn btn-primary btn-lg btn-block" type="submit" value="Iniciar Sesion"/>
+        <button class="btn btn-info btn-lg btn-block" type="submit">Inscribirse</button>
+        <div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+      </div>
+    </form>
+  </div>
+
+
+
+</body>
+</html>

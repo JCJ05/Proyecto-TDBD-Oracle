@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+
+    <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+
+    <section id="hero">
+    <div class="hero-container">
+      <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <!-- Slide 1 -->
+          <div class="carousel-item active" style="background: url(../images/slide/slide-1.jpg)">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">Bienvenido a la<span>lucha</span></h2>
+                <p class="animate__animated animate__fadeInUp">Esto es un proyecto de desarrollo sostenible elaborado por la ONU donde se pueda aumentar el apoyo mundial a la lucha contra la caza furtiva, el tr&aacute;fico de especies protegidas de flora y fauna y abordar la demanda y la oferta ilegales de productos silvestres.</p>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Leer Mas</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-item" style="background: url(../images/slide/slide-2.jpg)">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated fanimate__adeInDown">Bienvenido a la<span>Lucha</span></h2>
+                <p class="animate__animated animate__fadeInUp">Esto es un proyecto de desarrollo sostenible elaborado por la ONU donde se pueda aumentar el apoyo mundial a la lucha contra la caza furtiva, el tráfico de especies protegidas de flora y fauna y abordar la demanda y la oferta ilegales de productos silvestres.</p>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Leer mas</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-item" style="background: url(../images/slide/slide-3.jpg)">
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2 class="animate__animated animate__fadeInDown">Bienvenido a la <span>Lucha</span></h2>
+                <p class="animate__animated animate__fadeInUp">Esto es un proyecto de desarrollo sostenible elaborado por la ONU donde se pueda aumentar el apoyo mundial a la lucha contra la caza furtiva, el tráfico de especies protegidas de flora y fauna y abordar la demanda y la oferta ilegales de productos silvestres.</p>
+                <a href="" class="btn-get-started animate__animated animate__fadeInUp">Leer mas</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+  
+  
+  <main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Organizaciones</h2>
+          <p>Organizaciones que trabajan con Nosotros.</p>
+        </div>
+
+        <div class="clients-slider swiper-container">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-1.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-2.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-3.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-4.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-5.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-6.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-7.png}" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img th:src="@{/images/assets/client-8.png}" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Clients Section -->
+
+  </main><!-- End #main -->
+    
+    
+    <footer th:replace="layouts/fragmento :: footer"></footer>
+
+
+</body>
+</html>

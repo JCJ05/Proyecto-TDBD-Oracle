@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+    <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+       
+       <br>
+     
+      <a sec:authorize="hasRole('ROLE_ADMIN')" style="margin-left: 130px;"  class="btn btn-warning" th:href="@{/evento/form}">Crear nuevo Evento</a>
+   
+      <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+    
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <article class="entry" th:each="evento : ${eventos}">
+            
+         
+              <div class="entry-img">
+                <img  th:src="@{'/uploads/' + ${evento.foto}}" alt="" class="img-fluid" />
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html" th:text="${evento.nombre}"></a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Anonimo</a></li>
+                   <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html" th:text=${evento.ciudad.ciudad}></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html" th:text="${evento.direccion}"></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time th:text="${#dates.format(evento.fecha,'dd/MM/yyyy')}"></time></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p th:text="${evento.descripcion}">
+                 
+                </p>
+                
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success btn-xs" th:href="@{'/evento/info/' + ${evento.id}}">Editar Evento</a>
+                
+                <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger btn-xs" th:href="@{'/evento/spiderman/' + ${evento.id}}" onclick="return confirm('Estas seguro de eliminar el evento?');">Eliminar Evento</a>
+                
+              </div>
+              
+               <br>
+                     <br>
+                     
+                <div class="read-more">
+                  <a th:href="@{'/evento/ver/' + ${evento.id} }">VER PUBLICACION</a>
+                </div>
+              
+
+            </article>
+
+            
+   
+           </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+
+        </div>
+
+    </section><!-- End Blog Section -->
+           
+   
+    <footer th:replace="layouts/fragmento :: footer"></footer>
+
+
+</body>
+</html>

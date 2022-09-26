@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+      <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+     
+     <br>
+     
+     <h3 class="container">Puedes filtrar por tipo de publicacion y fecha</h3>
+     <div class="container py-4 border border-bg-blue">
+     
+         <form th:action="@{/publicacion/filtro}" method="post">
+         
+           
+            <div class="form-group row">
+			<label for="tipo" class="col-sm-4 col-form-label">Tipo de Publicacion</label>
+			<div class="col-sm-8">
+              <select id="tipo" name="tipoId" class="form-control">
+				
+				  <option value="0">Seleccionar...</option>
+				  <option th:if="${nombre == null}" th:each="tipo : ${tipos}"  th:text="${tipo.tipo}"  th:value="${tipo.id}"></option>
+				  <option th:if="${nombre != null}" th:each="ojala : ${minus}"  th:text="${ojala.tipo}"  th:value="${ojala.id}"></option>
+				  <option th:if="${nombre != null}" th:text="${nombre.tipo}" th:value="${nombre.id}" selected></option>
+				
+				
+				</select>
+				
+				</div>
+				</div>
+				
+				<br>
+				
+				<div class="form-group row">
+				<label class="col-sm-4 col-form-label">Fecha</label>
+				<div class="col-sm-8">
+
+					<input type="date" name="fecha" th:value="${fechaPuesta}" class="form-control"/>
+					
+				</div>
+			</div>
+         
+             <br>
+         
+            <div align="right">
+         
+             <input type="submit" value="Filtrar" class="btn btn-info d-flex" />
+         
+         </div>
+         </form>
+     
+     </div>
+ 
+       <br>
+ 
+         <a sec:authorize="hasRole('ROLE_ADMIN')" style="margin-left: 130px;"  class="btn btn-warning" th:href="@{/publicacion/form}">Crear nueva Publicacion</a>
+ 
+           <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 container entries">
+
+            <article class="entry" th:each="publi : ${publicaciones}">
+
+              <div class="entry-img">
+                <img th:src="@{'/uploads/' + ${publi.foto}}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html" th:text="'#'+ ${publi.titulo}"></a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li  class="d-flex align-items-center"><i class="bi bi-person"></i> <a th:text="${publi.tipoPublicacion.tipo}"></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time th:text="${#dates.format(publi.fecha,'dd/MM/yyyy')}" ></time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html"></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p th:text="${publi.subdescripcion} + '...'"></p>
+                 
+                     
+                  <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success" th:href="@{'/publicacion/ver/' + ${publi.id}}">Editar Publicacion</a>
+                  
+                   <a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger" th:href="@{'/publicacion/batman/' + ${publi.id}}"  onclick="return confirm('Estas seguro de eliminar la publicacion?');">ELiminar Publicacion</a>
+               
+                     <br>
+                     <br>
+                     
+                <div class="read-more">
+                  <a th:href="@{'/publicacion/info/' + ${publi.id} }">VER PUBLICACION</a>
+                </div>
+              </div>
+
+            </article><!-- End blog entry -->
+
+           
+           <div th:replace="layouts/fragmento :: pagination"></div>
+           
+
+          </div>
+          
+          </div>
+          
+          </div>
+          
+          </section>
+          
+          
+          <footer th:replace="layouts/fragmento :: footer"></footer>
+          
+        
+</body>
+</html>

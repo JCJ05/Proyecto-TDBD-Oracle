@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+     
+      <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+     
+                
+    <div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+	<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+	<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+	<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div> 
+        
+          <div class="container py-4">
+
+		<div class="card bg-light">
+	   <div class="card-header" th:text="${titulo}"></div>
+	   
+	    <div class="card-body">
+        
+        <form th:action="@{/voluntario/form/}" th:object="${voluntario}" method="post">
+
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Nombre</label>
+				<div class="col-sm-6">
+				
+					<input type="text" th:text="${usuario.nombre}" class="form-control" disabled/>
+						
+				</div>
+			</div>
+			
+			<br>
+              
+              <div class="form-group row">
+				<label class="col-sm-2 col-form-label">Apellido Paterno</label>
+				<div class="col-sm-6">
+				
+					<input type="text" th:text="${usuario.apePat}" class="form-control" disabled/>
+						
+				</div>
+			</div>
+			
+			
+			<br>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Apellido Materno</label>
+				<div class="col-sm-6">
+				
+					<input type="text" th:text="${usuario.apemat}" class="form-control" disabled/>
+						
+				</div>
+			</div>
+			
+			
+			<br>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Dni</label>
+				<div class="col-sm-6">
+				
+					<input type="text" th:text="${usuario.identificacion}" class="form-control" disabled/>
+						
+				</div>
+			</div>
+			
+			
+			<br>
+			
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">¿Porque quieres ser voluntario?</label>
+				<div class="col-sm-6">
+					<textarea th:field="*{descripcion}" class="form-control" style="resize: both;" minlength="100"  maxlength="2500"
+						th:errorclass="'form-control alert-danger'"  required></textarea> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+				</div>
+			</div>
+			
+			<br>
+			
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" value="Registrarme como voluntario" class="btn btn-info" />
+				</div>
+			</div>
+			
+			</form>
+			
+			 </div>
+		
+		</div>
+
+	</div>
+       
+       
+     
+      <footer th:replace="layouts/fragmento :: footer"></footer>
+</body>
+</html>

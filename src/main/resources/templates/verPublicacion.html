@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+      <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+    
+      <section id="blog" class="blog container">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+        
+         <div class="col-lg-9 container entries">
+           
+            <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img th:src="@{'/uploads/' + ${publicacion.foto}}"  alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html" th:text="${publicacion.titulo}"></a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Anonimo</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time th:text="${#dates.format(publicacion.fecha,'dd/MM/yyyy')}"></time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html" th:text="${publicacion.tipoPublicacion.tipo}"></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+              
+              
+                <p th:text="${publicacion.descripcion}">
+                
+                  <blockquote>
+                  
+                    <p th:text="${publicacion.resaltante}"></p>
+                  
+                  
+                  </blockquote>
+                
+                </p>
+                 
+              
+              </div>
+
+             
+
+            </article><!-- End blog entry -->
+            
+            </div>
+         </div>
+      </div>
+    </section>
+     
+     
+      <footer th:replace="layouts/fragmento :: footer"></footer>
+      
+</body>
+</html>

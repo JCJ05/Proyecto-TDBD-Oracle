@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Lucha contra la caza furtiva</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+ 
+  <link th:href="@{/images/assets/logo1.jpg}" rel="icon">
+  <link th:href="@{/images/assets/logo1.jpg}" rel="apple-touch-icon">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  
+  <link th:href="@{/css/assets/animate.min.css}" rel="stylesheet">
+  <link th:href="@{/css/assets/bootstrap.min.css}" rel="stylesheet">
+  <link th:href="@{/css/assets/bootstrap-icons.css}" rel="stylesheet">
+  <link th:href="@{/css/assets/boxicons.min.css}" rel="stylesheet">
+  <link th:href="@{/css/assets/glightbox.min.css}" rel="stylesheet">
+  <link th:href="@{/css/assets/swiper-bundle.min.css}" rel="stylesheet">
+  
+  
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <style type="text/css"> 
+    a:hover { cursor: pointer; } 
+</style> 
+</head>
+<body>
+
+   
+    <section th:fragment="section" id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">ethicsoffice@un.org.</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span> +1 (917) 367-9858.</span></i>
+      </div>
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+      </div>
+    </div>
+  </section>
+  
+  
+  <header th:fragment="header" id="header" class="d-flex align-items-center">
+  <div class="container d-flex justify-content-between align-items-center">
+
+    <div class="logo">
+      <h1><a th:href="@{/index}">Vida de Ecosistemas Terrestres</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    </div>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="active" th:href="@{/index}">Inicio</a></li>
+        <li><a th:href="@{/evento/listaEventos}">Eventos</a></li>
+        <li class="dropdown"><a th:href=@{/publicacion/lista}>Publicaciones<i class="bi bi-chevron-down"></i></a>
+        
+        </li>
+       
+        
+        <li  class="dropdown"><a th:href="@{/denuncia/informacion}">Denunciar</a>
+        
+        
+           <ul sec:authorize="hasRole('ROLE_ADMIN')">
+                
+                <li><a th:href="@{/denuncia/listar}">Lista de Denuncias</a></li>
+                
+              </ul>
+        
+           
+        
+        
+        </li>
+        <li><a th:href="@{/conocenos}">Contactanos</a></li>
+         <li sec:authorize="!isAuthenticated()" class="dropdown"><a th:href="@{/login}"><span>Iniciar Sesion</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a th:href="@{/usuario/form}">Únete</a></li>
+            <li><a href="about.html">conocenos</a></li>
+            
+            
+          </ul>
+        </li>
+        
+         <li sec:authorize="isAuthenticated()" class="dropdown"><a><span sec:authentication="name"></span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+          
+          <form id="logoutForm" th:action="@{/logout}" method="post">
+          
+            <li><a onclick="document.getElementById('logoutForm').submit();">Cerrar Sesion</a></li>
+             <input type="hidden" th:name = "${_csrf.parameterName}" th:value = "${_csrf.token}">
+            
+            </form>
+            
+            <li><a href="about.html">Editar mi Usuario</a></li>
+            
+            
+          </ul>
+        </li>
+        
+        
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+
+
+   <div th:fragment="pagination" class="blog-pagination">
+              <ul class="justify-content-center">
+                <li class="page-item" th:class="${not page.hasPrevious? 'page-item disabled' : 'page-item' }"><span class="page-link" th:if="${not page.hasPrevious}">&laquo;</span> <a class="page-link"
+				th:if="${page.hasPrevious}"
+				th:href="@{${page.url}(page=${page.paginaActual-2})}">&laquo;</a></li>
+			<li class="page-item" th:each="item : ${page.pages}" th:class="${item.actual? 'page-item active' : 'page-item'}"><span class="page-link" th:if="${item.actual}"
+				th:text="${item.numero}"></span> <a class="page-link" th:if="${not item.actual}"
+				th:href="@{${page.url}(page=${item.numero-1})}"
+				th:text="${item.numero}"></a></li>
+			<li class="page-item" th:class="${not page.hasNext? 'page-item disabled' : 'page-item' }" ><span class="page-link" th:if="${not page.hasNext}">&raquo;</span> <a class="page-link"
+				th:if="${page.hasNext}"
+				th:href="@{${page.url}(page=${page.paginaActual})}">&raquo;</a></li>
+              </ul>
+            </div>
+
+
+
+ <footer th:fragment="footer" id="footer">
+
+     <div class="footer-newsletter">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h4>La Caza es Ilegal</h4>
+            <p>Si vez a tipos malos no dudes en denunciarlos, suscribete y asi ayudaras a los animales.</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Te puede interesar:</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Inicio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Registrate</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Denuncias</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Eventos</a></li>
+            </ul>
+          </div>
+
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contáctanos</h4>
+            <p>
+              Perú<br><br>
+              <strong>Phone:</strong> +51 976154026<br>
+              <strong>Email:</strong> salvavidas@gmail.com<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Siguenos en nuestras redes sociales</h3>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Grupo4</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
+        Hecho por el: <a>Grupo4</a>
+      </div>
+    </div>
+    
+     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Vendor JS Files -->
+  <script th:src="@{/js/vendor/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/vendor/glightbox.min.js}"></script>
+  <script th:src="@{/js/vendor/isotope.pkgd.min.js}"></script>
+  <script th:src="@{/js/vendor/validate.js}"></script>
+  <script th:src="@{/js/vendor/purecounter.js}"></script>
+  <script th:src="@{/js/vendor/swiper-bundle.min.js}"></script>
+  <script th:src="@{/js/vendor/noframework.waypoints.js}"></script>
+
+  <!-- Template Main JS File -->
+  <script th:src="@{/js/main.js}"></script>
+    
+  </footer><!-- End Footer -->
+
+
+  
+
+
+</body>
+</html>

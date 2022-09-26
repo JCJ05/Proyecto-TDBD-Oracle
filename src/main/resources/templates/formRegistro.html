@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Registro de usuario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link th:href="@{/images/assets/logo1.jpg}" rel="icon">
+  <link th:href="@{/images/assets/logo1.jpg}" rel="apple-touch-icon">
+  
+   <!-- Bootstrap CSS -->
+  <link th:href="@{/css2/bootstrap.min.css}" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link th:href="@{/css2/bootstrap-theme.css}" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link th:href="@{/css2/elegant-icons-style.css}" rel="stylesheet" />
+  <link th:href="@{/css2/font-awesome.css}" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link th:href="@{/css2/style.css}" rel="stylesheet">
+  <link th:href="@{/css2/style-responsive.css}" rel="stylesheet" />
+  
+</head>
+<body>
+
+
+    <section id="container" class="">
+    <!--header start-->
+    <header class="header dark-bg">
+      
+      <a href="index2.html" class="logo">Registrar</a>
+      
+    </header>
+    <!--header end-->
+ 
+  
+  <div class="row">
+          <div class="col-lg-12">
+            <section class="panel">
+              <header class="panel-heading">
+                Advanced Form validations
+              </header>
+              <div class="panel-body">
+                <div class="form">
+                  <form class="form-validate form-horizontal "  th:action="@{/usuario/form}" th:object="${usuario}" method="post">
+
+                    <div class="form-group">
+                      <label for="fullname" class="control-label col-lg-2">Nombre <span class="required">*</span></label>
+                      <div class="col-lg-10"> 
+                        <input class=" form-control" id="fullname"  type="text"  onkeypress="return soloLetras(event)" th:field="*{nombre}" />
+                         <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Apellido Paterno <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class=" form-control" id="fullname"  type="text"  onkeypress="return soloLetras(event)"  th:field="*{apePat}"/>
+                         <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('apePat')}" th:errors="*{apePat}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="fullname" class="control-label col-lg-2">Apellido Materno <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="fullname"  type="text"  onkeypress="return soloLetras(event)" th:field="*{apemat}"/>
+                         <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('apemat')}" th:errors="*{apemat}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="date" class="control-label col-lg-2">Fecha de nacimiento <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="date"  type="date" th:field="*{fecha}"/>
+                        <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="username" class="control-label col-lg-2">Identificacion <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="validanumericos"  type="text" maxlength="8" min="8" th:field="*{identificacion}" />
+                         <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('identificacion')}" th:errors="*{identificacion}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="phone" class="control-label col-lg-2">Telefono <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="phone" type="tel" maxlength="11" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" th:field="*{telefono}" required />
+                         <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+                      </div>
+                    </div>
+
+                    
+
+                    <div class="form-group ">
+                      <label for="username" class="control-label col-lg-2">Ciudad<span class="required">*</span></label>
+                      <div class="col-lg-10">
+                         <select id="tipo" th:field="*{ciudad}" class="form-control">
+				
+				             <option value="0">Seleccionar...</option>
+				             <option th:each="ciudad : ${ciudade}"  th:text="${ciudad.ciudad}"  th:value="${ciudad.id}"></option>
+				
+			              	</select>
+			              	 <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="email" class="control-label col-lg-2">Correo <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control "  type="text" th:field="*{username}" />
+                         <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="password" class="control-label col-lg-2">Contraseña <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="password" name="password" type="password" th:field="*{password}" />
+                      </div>
+                    </div>
+
+                    <div class="form-group ">
+                      <label for="confirm_password" class="control-label col-lg-2">Confirmar Contraseña <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <input class="form-control " id="confirm_password" name="confirm_password" type="password" />
+                      </div>
+                    </div>
+                    
+                    <div class="form-group ">
+                      <label for="agree" class="control-label col-lg-2 col-sm-3">Aceptar las Politicas <span class="required">*</span></label>
+                      <div class="col-lg-10 col-sm-9">
+                        <input type="checkbox" style="width: 20px" class="checkbox form-control" id="agree" name="agree" />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-lg-offset-2 col-lg-10">
+                         <input type="submit" class="btn btn-info">
+                     
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <!-- page end-->
+       </section>
+       
+       
+       
+       
+   <script th:src="@{/js2/jquery.js}"></script>
+  <script th:src="@{/js2/bootstrap.min.js}"></script>
+  <!-- nice scroll -->
+  <script th:src="@{/js2/jquery.scrollTo.min.js}"></script>
+  <script th:src="@{/js2/jquery.nicescroll.js}" type="text/javascript"></script>
+  <!-- jquery validate js -->
+  <script type="text/javascript" th:src="@{/js2/jquery.validate.min.js}"></script>
+
+  <!-- custom form validation script for this page-->
+  <script th:src="@{/js2/form-validation-script.js}"></script>
+  <!--custome script for all page-->
+  <script th:src="@{/js2/scripts.js}"></script>
+  
+  <script>
+  function soloLetras(e) {
+    var key = e.keyCode || e.which,
+      tecla = String.fromCharCode(key).toLowerCase(),
+      letras = " áéíóúabcdefghijklmnñopqrstuvwxyz",
+      especiales = [8, 37, 39, 46],
+      tecla_especial = false;
+
+    for (var i in especiales) {
+      if (key == especiales[i]) {
+        tecla_especial = true;
+        break;
+      }
+    }
+
+    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+      return false;
+    }
+  }
+  
+  
+  $(function(){
+
+	  $('#validanumericos').keypress(function(e) {
+		if(isNaN(this.value + String.fromCharCode(e.charCode))) 
+	     return false;
+	  })
+	  .on("cut copy paste",function(e){
+		e.preventDefault();
+	  });
+
+	});
+  
+</script>
+   
+
+</body>
+</html>

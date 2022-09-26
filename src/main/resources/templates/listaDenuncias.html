@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+   
+   <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+       
+         <br>
+         
+         
+    <div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+	<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+	<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+	<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+	
+	 <br>
+	 
+	  <h3 class="container">Puedes filtrar por tipo de publicacion y fecha</h3>
+     <div class="container py-4 border border-bg-blue">
+     
+         <form th:action="@{/denuncia/filtro}" method="post">
+         
+           
+            <div class="form-group row">
+			<label for="tipo" class="col-sm-4 col-form-label">Tipo de denuncia</label>
+			<div class="col-sm-8">
+              <select id="tipo" name="dnId" class="form-control">
+				
+				  <option value="0">Seleccionar...</option>
+				  <option th:if="${nombre == null}" th:each="tipo : ${tipos}"  th:text="${tipo.nomDenuncia}"  th:value="${tipo.id}"></option>
+				  <option th:if="${nombre != null}" th:each="ojala : ${minus}"  th:text="${ojala.nomDenuncia}"  th:value="${ojala.id}"></option>
+				  <option th:if="${nombre != null}" th:text="${nombre.nomDenuncia}" th:value="${nombre.id}" selected></option>
+				
+				
+				</select>
+				
+				</div>
+				</div>
+				
+				<br>
+				
+				<div class="form-group row">
+				<label class="col-sm-4 col-form-label">Fecha</label>
+				<div class="col-sm-8">
+
+					<input type="date" name="fecha" th:value="${fechaPuesta}" class="form-control"/>
+					
+				</div>
+			</div>
+         
+             <br>
+             
+             
+             <div class="form-group row">
+				<label class="col-sm-4 col-form-label">Estado de denuncia</label>
+				<div class="col-sm-8">
+                    
+                    <select name="valor" class="form-control">
+                    
+                       <option value="0">Seleccione...</option>
+                       <option th:if="${valor != '1'}" value="1">No leidas</option>
+                       <option th:if="${valor != '2'}"  value="2">Leidas</option>
+                       <option th:if="${valor != '3'}"  value="3">Procesadas</option>
+                       <option th:if="${valor != '4'}"  value="4">Culminadas</option>
+                       <option th:if="${valor2 == '6'}" th:text="${opcion}" th:value="${valorId}" selected></option>
+                    
+                    </select>
+					
+					
+				</div>
+			</div>
+			
+			<br>
+			
+			
+			 <div class="form-group row">
+			<label for="tipo" class="col-sm-4 col-form-label">Ciudad</label>
+			<div class="col-sm-8">
+              <select id="tipo" name="idCiudad" class="form-control">
+				
+				  <option value="0">Seleccionar...</option>
+				  <option th:if="${nom == null}" th:each="ciudad : ${ciudades}"  th:text="${ciudad.ciudad}"  th:value="${ciudad.id}"></option>
+				  <option th:if="${nom != null}" th:each="ciu : ${ciud}"  th:text="${ciu.ciudad}"  th:value="${ciu.id}"></option>
+				  <option th:if="${nom != null}" th:text="${nom.ciudad}" th:value="${nom.id}" selected></option>
+				
+				
+				</select>
+				
+				</div>
+				</div>
+             
+             <br>
+         
+            <div align="right">
+         
+             <input type="submit" value="Filtrar" class="btn btn-info d-flex" />
+         
+         </div>
+         </form>
+     
+     </div>
+     
+     
+       <br>
+           
+           <table class="container table table-striped">
+           
+              <thead>
+              
+                <tr>
+                
+                  <th>ID</th>
+                  <th>Fecha</th>
+                  <th>Ciudad</th>
+                  <th>Usuario</th>
+                  <th>Marcar como vista</th>
+                  <th>Marcar como procesada</th>
+                  <th>Marcar como culminada</th>
+                  <th>Eliminar</th>
+                  
+                
+                
+                </tr>
+              
+              </thead>
+              
+              
+              <tbody>
+              
+               <tr th:each="denuncia : ${denuncias}">
+               
+                <td><a class="btn btn-primary btn-xs" th:href="@{/denuncia/info/} + ${denuncia.id}" th:text="${denuncia.id}"></a></td>
+                 <td th:text="${denuncia.fecha}"></td>
+                 <td th:text="${denuncia.ciudad.ciudad}"></td>
+                 <td th:text="${denuncia.usuario.nombre}"></td>
+                 <td th:if="${denuncia.leida == false}"><a class="btn btn-primary btn-xs" th:href="@{/denuncia/vista/} + ${denuncia.id}">Leida</a></td>
+                 <td th:if="${denuncia.leida == true}"><p style="color: blue">Denuncia ya vista</p></td>
+                 <td th:if="${denuncia.procesada == false}"><a class="btn btn-warning btn-xs" th:href="@{/denuncia/procesar/} + ${denuncia.id}" >Procesada</a></td>
+                 <td th:if="${denuncia.procesada == true}"><p style="color: orange">Denuncia ya procesada</p></td>
+                 <td th:if="${denuncia.culminada == false}"><a class="btn btn-info btn-xs"    th:href="@{/denuncia/culminada/} + ${denuncia.id}">Culminada</a></td>
+                 <td th:if="${denuncia.culminada == true}"><p style="color: green">Denuncia ya culminada</p></td>
+                 <td><a class="btn btn-danger btn-xs"  th:href="@{/denuncia/eliminar/} + ${denuncia.id}">Eliminar</a></td>
+ 
+               
+               </tr>
+              
+              
+              </tbody>
+           
+           
+           </table>
+           
+           
+           <br>
+           <br>
+           
+           
+           <nav class="blog-pagination">
+            <ul class="justify-content-center pagination">
+                <li class="page-item" th:class="${not page.hasPrevious? 'page-item disabled' : 'page-item' }"><span class="page-link" th:if="${not page.hasPrevious}">&laquo;</span> <a class="page-link"
+				th:if="${page.hasPrevious}"
+				th:href="@{${page.url}(page=${page.paginaActual-2})}">&laquo;</a></li>
+			<li class="page-item" th:each="item : ${page.pages}" th:class="${item.actual? 'page-item active' : 'page-item'}"><span class="page-link" th:if="${item.actual}"
+				th:text="${item.numero}"></span> <a class="page-link" th:if="${not item.actual}"
+				th:href="@{${page.url}(page=${item.numero-1})}"
+				th:text="${item.numero}"></a></li>
+			<li class="page-item" th:class="${not page.hasNext? 'page-item disabled' : 'page-item' }" ><span class="page-link" th:if="${not page.hasNext}">&raquo;</span> <a class="page-link"
+				th:if="${page.hasNext}"
+				th:href="@{${page.url}(page=${page.paginaActual})}">&raquo;</a></li>
+              </ul>
+           </nav>
+     
+     <footer th:replace="layouts/fragmento :: footer"></footer>
+     
+</body>
+</html>

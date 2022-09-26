@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+
+
+    <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+    
+         
+         <section id="blog" class="blog container">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+        
+         <div class="col-lg-9 container entries">
+           
+            <article class="entry entry-single">
+
+              <div class="container">
+                <img th:src="@{/images/stop.jpg}"  alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                 <span> #No permitas mas masacres encontrarlos depende de ti!!</span>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">Anonimo</a></li>
+                  
+                </ul>
+              </div>
+
+              <div class="entry-content">
+              
+              
+                <p>Tu puedes formar parte de este cambio para eso tienes la oportunidad de ante cualuqier tipo de caza ilegal
+                , Venta ilegal de Productos con animales, lugares de intercambio, etc.
+                <br>
+                Poder denunciar todos estos hechos y asi poder detener esta masacre que contribuye el humano con los animales, basta de lucros 
+                con las pieles de estas especies podemos hacer un cambio y esto depente de ti.
+                
+                   <blockquote>
+                  <p>
+                    Recuerda que todas las denuncias son Anonimas o con tu usuario si asi lo prefieres, asi que no tienes porque temer por tu seguridad
+                    ven y denuncia sin miedo se parte de este gran movimiento en beneficio del planeta.
+                  </p>
+                </blockquote>
+                  
+                  Solo te pedimos que las denuncias sean realizadas con la seriedad del caso recuerda que esto es por los animales y el planeta
+                  #LuchemosJuntos.
+                
+                </p>
+                 
+              
+              </div>
+
+               <a class="btn btn-success" th:href="@{/denuncia/form}">Tengo una denuncia</a>
+
+            </article><!-- End blog entry -->
+            
+            </div>
+         </div>
+      </div>
+    </section>
+
+
+          
+
+     <footer th:replace="layouts/fragmento :: footer"></footer>
+    
+</body>
+</html>

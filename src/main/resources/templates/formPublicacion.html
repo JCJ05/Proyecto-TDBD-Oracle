@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/fragmento :: head"></head>
+<body>
+
+    
+     <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+     
+     
+     
+     
+     
+          <div class="container py-4">
+
+		<div class="card bg-light">
+	   <div class="card-header" th:text="${titulo}"></div>
+	   
+	    <div class="card-body">
+
+		<div th:object="${publicacion}" th:remove="tag">
+
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+
+				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+
+			</ul>
+
+		</div>
+       
+       <form th:action="@{/publicacion/form/}" th:object="${publicacion}" method="post" enctype="multipart/form-data">
+
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Titulo</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{titulo}" class="form-control"
+						th:errorclass="'form-control alert-danger'" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>
+				</div>
+			</div>
+			
+			<br>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Descripcion</label>
+				<div class="col-sm-6">
+					<textarea th:field="*{descripcion}" class="form-control" style="resize: both;" minlength="100"  maxlength="2500"
+						th:errorclass="'form-control alert-danger'"  required></textarea> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></small>
+				</div>
+			</div>
+
+				<br>
+				
+				<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Frase de Publicacion</label>
+				<div class="col-sm-6">
+					<textarea th:field="*{resaltante}" class="form-control" style="resize: both;" minlength="40"  maxlength="150"
+						th:errorclass="'form-control alert-danger'"  required></textarea> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('resaltante')}" th:errors="*{resaltante}"></small>
+				</div>
+			</div>
+			
+			<br>
+            
+            <div class="form-group row">
+            
+              <label for="file" class="col-sm-2 col-form-label">Foto</label>
+               <div class="col-sm-6">
+               
+                 <input type="file" name="file" class="form-control" th:class="${#fields.hasErrors('foto') ? 'form-control alert-danger' : 'form-control'}" />
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></small>
+                
+               </div>
+            
+            
+            </div>
+            
+            <br>
+            
+            
+            <div class="form-group row">
+			<label for="tipo" class="col-sm-2 col-form-label">Tipo de Publicacion</label>
+			<div class="col-sm-6">
+
+				<select id="tipo" th:field="*{tipoPublicacion}" class="form-control">
+				
+				  <option value="0">Seleccionar...</option>
+				  <option th:each="tipo : ${tipos}"  th:text="${tipo.tipo}"  th:value="${tipo.id}"></option>
+				
+				</select>
+				
+
+			</div>
+			
+			<div th:if="${#fields.hasErrors('tipoPublicacion')}" th:errors="*{tipoPublicacion}" class="alert alert-danger"></div>
+
+		</div>
+            
+            <br>
+
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" th:value="${boton}" class="btn btn-info" />
+				</div>
+			</div>
+
+		</form>
+		
+		 </div>
+		
+		</div>
+
+	</div>
+       
+       
+    
+    
+     <footer th:replace="layouts/fragmento :: footer"></footer>
+    
+
+</body>
+</html>

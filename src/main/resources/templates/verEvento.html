@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace = "layouts/fragmento :: head"></head>
+<body>
+
+     <section th:replace="layouts/fragmento :: section"></section>
+     
+     <header th:replace="layouts/fragmento :: header"></header>
+     
+          
+    <div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+	<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+	<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+	<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+	
+	<br>
+	
+	
+	 <section id="blog" class="blog container">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+        
+         <div class="col-lg-9 container entries">
+     
+        <article class="entry entry-single">
+
+              <div class="entry-img">
+                <img th:src="@{'/uploads/' + ${evento.foto}}"  alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html" th:text="${evento.nombre}"></a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a th:text="${evento.ciudad.ciudad}"></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time th:text="${#dates.format(evento.fecha,'dd/MM/yyyy')}"></time></a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html" th:text="${evento.direccion}"></a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+              
+              
+               
+                
+                  <blockquote>
+                  
+                    <p th:text="${evento.descripcion}"></p>
+                  
+                  
+                  </blockquote>
+                
+              
+                 
+              
+              </div>
+
+              <a class="btn btn-warning" th:href="@{/eventoVoluntario/inscribirse/} + ${evento.id}">Quiero ser Voluntario</a>
+
+            </article><!-- End blog entry -->
+            
+             </div>
+         </div>
+      </div>
+    </section>
+     
+            
+     
+     <footer th:replace="layouts/fragmento :: footer"></footer>
+
+</body>
+</html>
